@@ -1,36 +1,39 @@
-const File = require('vinyl');
-const through = require('through2').obj;
+import { Transform } from 'stream';
+import through2 from 'through2';
+import File from 'vinyl';
+import { ErrorMessage } from './error-message';
+import { FileType } from './file-type';
+import { htmlTemplate, jsTemplate } from './templates';
+import { isBalanced } from './utils';
 
-const { ErrorMessage } = require('./error-message');
-const { FileType } = require('./file-type');
-const { isBalanced } = require('./utils');
-const { jsTemplate, htmlTemplate } = require('./templates');
+const through = through2.obj;
 
-/**
- * @param {string} nodePrefix
- */
-module.exports = function gulpNodeRedPipe(nodePrefix) {
+export function gulpNodeRedPipe(nodePrefix: string): Transform {
   'use strict';
 
-  let nodeRedFiles = {
+  let nodeRedFiles: {
+    [key: string]: {
+      [key: string]: string;
+    };
+  } = {
     [FileType.JS]: {},
     [FileType.HTML]: {},
   };
 
-  function processFiles(file, enc, callback) {
+  function processFiles(file: File, enc: string, callback: Function) {
     if (!nodeRedFiles[file.extname][file.stem]) {
       nodeRedFiles[file.extname][file.stem] = '';
     }
 
     nodeRedFiles[file.extname][file.stem] = `
       ${nodeRedFiles[file.extname][file.stem]}
-      ${file.contents.toString()}
+      ${file.contents ? file.contents.toString() : ''}
     `;
 
     callback();
   }
 
-  function flushResult(callback) {
+  function flushResult(this: Transform, callback: Function) {
     let nodeNameList = Object.keys(nodeRedFiles[FileType.JS]);
     let isUnbalanced = !isBalanced(
       nodeRedFiles[FileType.JS],
@@ -63,4 +66,4 @@ module.exports = function gulpNodeRedPipe(nodePrefix) {
   }
 
   return through(processFiles, flushResult);
-};
+}
