@@ -1,0 +1,36 @@
+{
+  "name": "gulp-node-red",
+  "version": "0.1.0-alpha.1",
+  "description": "Build source files into Node-RED nodes",
+  "main": "lib/index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EvanJ0hnson/gulp-node-red.git"
+  },
+  "keywords": [
+    "gulp",
+    "node-red"
+  ],
+  "author": "Ivan Gerasimov <ivangerasimow@gmail.com> (gerasimov.pw)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/EvanJ0hnson/gulp-node-red/issues"
+  },
+  "homepage": "https://github.com/EvanJ0hnson/gulp-node-red#readme",
+  "devDependencies": {
+    "eslint": "6.7.2",
+    "eslint-config-prettier": "6.7.0",
+    "eslint-plugin-prettier": "3.1.1",
+    "prettier": "1.19.1"
+  },
+  "dependencies": {
+    "through2": "3.0.1",
+    "vinyl": "2.2.0"
+  }
+}
