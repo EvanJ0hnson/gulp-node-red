@@ -1,6 +1,18 @@
-# gulp-node-red
+# Gulp Node-RED
 
 Build source files into Node-RED nodes
+
+## Installation
+
+npm
+```bash
+$ npm install --save-exact gulp-node-red
+```
+
+Yarn
+```bash
+$ yarn add --exact gulp-node-red
+```
 
 ## Usage
 
