@@ -1,10 +1,8 @@
 /**
  * @description
  * Check that amount of JS files is even with the amount of HTML templates
- * @param  {...Object} targets
- * @returns {boolean}
  */
-function isBalanced(...targets) {
+export function isBalanced(...targets: Object[]): boolean {
   if (!targets.length) {
     return false;
   }
@@ -14,7 +12,3 @@ function isBalanced(...targets) {
 
   return restItems.every((t) => Object.keys(t).length === firstItemLength);
 }
-
-module.exports = {
-  isBalanced,
-};
